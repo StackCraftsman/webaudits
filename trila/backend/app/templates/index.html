@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Example</title>
+</head>
+<body>
+    <h1>WebSocket Example</h1>
+    <input type="text" id="message" placeholder="Enter message">
+    <button id="sendButton">Send</button>
+    
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.1/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+        socket.on('connect', function() {
+            console.log('Connected to WebSocket server.');
+        });
+
+        socket.on('message', function(data) {
+            console.log('Received message: ' + data);
+            // Handle received message here if needed
+        });
+
+        document.getElementById('sendButton').addEventListener('click', function() {
+            var message = document.getElementById('message').value;
+            socket.emit('message', message);
+            console.log('Sent message: ' + message);
+        });
+    </script>
+</body>
+</html>
